@@ -11,10 +11,10 @@ module.exports = app => {
 
     let route = app.route('/users');
 
-    // Metodo para chamar
+    
     route.get((req, res) => {
 
-        // consultar todos no banco
+        
         db.find({}).sort({ name: 1 }).exec((err, users) => {
 
             if (err) {
@@ -33,7 +33,7 @@ module.exports = app => {
 
     });
 
-    // metodo para inseirir
+    
     route.post((req, res) => {
 
         if (!app.utils.validator.user(app, req, res)) return false;
@@ -54,10 +54,10 @@ module.exports = app => {
 
     let routeId = app.route('/users/:id');
 
-    // metedo para consultar
+    
     routeId.get((req, res) => {
 
-        // consulta 1 so no banco
+        
         db.findOne({ _id: req.params.id }).exec((err, user) => {
             if (err) {
                 app.utils.error.send(err, req, res)
@@ -69,7 +69,7 @@ module.exports = app => {
 
     });
 
-    // metodo para alterar
+    
     routeId.put((req, res) => {
 
         if (!app.utils.validator.user(app, req, res)) return false;
@@ -86,10 +86,9 @@ module.exports = app => {
 
     });
 
-    // para deletar
+   
     routeId.delete((req, res) => {
 
-        // nedb delete no banco
         db.remove({ _id: req.params.id }, {}, err => {
 
             if (err) {
@@ -101,9 +100,3 @@ module.exports = app => {
         });
     });
 };
-
-// nedb
-// consulta find para todos findOne para 1 so
-// alterar update
-// cadastrar insert
-//  para deletar remove
